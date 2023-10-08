@@ -1,15 +1,17 @@
 'use strict';
 
-function randomDice(dice) {
-    const match = dice.match(/^d\d+$/);
-    if (!match) {
-        return "Введите значение в формет d*, где * - любое число."
-             + `\nВаш ввод: ${dice}`;
-    }
+function randomDice(dice, number) {
+    const dices = ['d4', 'd6', 'd8', 'd10', 'd12', 'd16', 'd20'];
+
+    if (!dices.includes(dice)) {
+        return "Выберите корректный кубик! Возможные варианты:" + dices.join(", ");
+    };
 
     const max = Number.parseInt(dice.match(/\d+/));
+    const randomNumber = Math.floor(( Math.random() * max + 1));
 
-    return Math.floor(( Math.random() * max + 1));
+    return randomNumber === number ? "Вы выиграли." : `Вы проиграли. Полученное число ${randomDice}`;
 }
 
-console.log(randomDice("d20"));
+console.log(randomDice("d4", 4));
+console.log(randomDice("d3"));

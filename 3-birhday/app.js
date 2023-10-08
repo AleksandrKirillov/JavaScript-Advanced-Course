@@ -21,7 +21,7 @@ function calcAge(date){
     if ( diffMonth < 0 || ( diffMonth === 0 && diffDay > 0 )){
         age--;
     };
-    return age;
+    return age >= 14;
 }
 
 console.log(calcAge(user1.birthday));
