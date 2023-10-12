@@ -10,7 +10,7 @@ function randomDice(dice, number) {
     const max = Number.parseInt(dice.match(/\d+/));
     const randomNumber = Math.floor(( Math.random() * max + 1));
 
-    return randomNumber === number ? "Вы выиграли." : `Вы проиграли. Полученное число ${randomDice}`;
+    return randomNumber === number ? "Вы выиграли." : `Вы проиграли. Полученное число ${randomNumber}`;
 }
 
 console.log(randomDice("d4", 4));
