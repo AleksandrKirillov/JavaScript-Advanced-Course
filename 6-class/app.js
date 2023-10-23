@@ -8,7 +8,7 @@ class Car {
   constructor(mark, model, mileage) {
     this.#mark = mark;
     this.#model = model;
-    this.mileage = mileage;
+    this.#mileage = mileage;
   }
 
   set mileage(run) {
@@ -20,13 +20,14 @@ class Car {
   }
 
   info() {
-    console.log(`Марка ${this.#mark} \nМодель ${this.#model} \nПробег ${this.#mileage}`);
+    console.log(
+      `Марка ${this.#mark} \nМодель ${this.#model} \nПробег ${this.#mileage}`
+    );
   }
 }
 
-const audi = new Car('Audi', 'Q5', 10000);
+const audi = new Car("Audi", "Q5", 10000);
 console.log(audi);
-audi.info()
+audi.info();
 audi.mileage = 40000;
-audi.info()
-
+audi.info();

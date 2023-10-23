@@ -1,34 +1,45 @@
 "use strict";
 
-const SECTOMONTH = 2678400;
-const SECTODAY = 86400;
-const SECTOHOUR = 3600;
-const SECTOMINUTE = 60;
+const SEC_TO_MONTH = 2678400;
+const SEC_TO_DAY = 86400;
+const SEC_TO_HOUR = 3600;
+const SEC_TO_MINUTE = 60;
 
 function calcBeforeNewYear() {
   const nowYear = new Date().getFullYear();
   const newYearDate = new Date(nowYear + 1, 0, 0);
 
-  setInterval(() => {
-    const diff = newYearDate.getTime() - new Date().getTime();
-    document.querySelector(".element").innerText = prepareTextTimer(diff);
+  outputCalc(newYearDate.getTime());
+
+  const interval = setInterval(() => {
+    outputCalc(newYearDate.getTime());
   }, 1000);
+
+  setTimeout(
+    () => clearInterval(interval),
+    newYearDate.getTime() - new Date().getTime()
+  );
+}
+
+function outputCalc(time) {
+  const diff = time - new Date().getTime();
+  document.querySelector(".element").innerText = prepareTextTimer(diff);
 }
 
 function prepareTextTimer(ms) {
   let seconds = Math.floor(ms / 1000);
 
-  let month = Math.floor(seconds / SECTOMONTH);
-  seconds -= month * SECTOMONTH;
+  let month = Math.floor(seconds / SEC_TO_MONTH);
+  seconds -= month * SEC_TO_MONTH;
 
-  let day = Math.floor(seconds / SECTODAY);
-  seconds -= day * SECTODAY;
+  let day = Math.floor(seconds / SEC_TO_DAY);
+  seconds -= day * SEC_TO_DAY;
 
-  let hour = Math.floor(seconds / SECTOHOUR);
-  seconds -= hour * SECTOHOUR;
+  let hour = Math.floor(seconds / SEC_TO_HOUR);
+  seconds -= hour * SEC_TO_HOUR;
 
-  let minute = Math.floor(seconds / SECTOMINUTE);
-  seconds -= minute * SECTOMINUTE;
+  let minute = Math.floor(seconds / SEC_TO_MINUTE);
+  seconds -= minute * SEC_TO_MINUTE;
 
   return (
     `До нового года осталось: ` +
