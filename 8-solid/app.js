@@ -1,20 +1,28 @@
 "use strict";
 
 class Billing {
-  #amount = 10;
+  #amount;
+
+  constructor(amount) {
+    this.#amount = amount;
+  }
 
   calculateTotal() {
     return this.#amount;
   }
 }
 
-class fixBilling extends Billing {}
+class fixBilling extends Billing {
+  constructor(amount) {
+    super(amount);
+  }
+}
 
 class hourBilling extends Billing {
   #hour;
 
-  constructor(hour) {
-    super();
+  constructor(amount, hour) {
+    super(amount);
     this.#hour = hour;
   }
 
@@ -24,15 +32,15 @@ class hourBilling extends Billing {
 }
 
 class itemBilling extends Billing {
-  #items;
+  #countItems;
 
-  constructor(items) {
-    super();
-    this.#items = items;
+  constructor(amount, items) {
+    super(amount);
+    this.#countItems = items.length;
   }
 
   calculateTotal() {
-    return super.calculateTotal() * this.#items.length;
+    return super.calculateTotal() * this.#countItems;
   }
 }
 
@@ -42,9 +50,10 @@ class Bill {
   }
 }
 
-const fixBill = new fixBilling;
-const hourBill = new hourBilling(5);
-const itemBill = new itemBilling(['Burberry', 'Arduino', 'Remote controller']);
+const amount = 10;
+const fixBill = new fixBilling(amount);
+const hourBill = new hourBilling(amount, 5);
+const itemBill = new itemBilling(amount, ['Burberry', 'Arduino', 'Remote controller']);
 const bill1 = new Bill;
 console.log('Фикс', bill1.calculateBill(fixBill));
 console.log('Часовая', bill1.calculateBill(hourBill));
